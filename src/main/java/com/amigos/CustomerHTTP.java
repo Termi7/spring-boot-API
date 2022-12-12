@@ -3,13 +3,7 @@ package com.amigos;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 
@@ -32,11 +26,11 @@ class CustomerHTTP {
     }
 
 
-    @GetMapping("/customers/{id}")
-    Optional<Customer> one(@PathVariable Integer id) {
+    @GetMapping("/employees/{id}")
+    Customer one(@PathVariable Integer id) {
 
-        return repository.findById(id);
-//                .orElseThrow(() -> new CustomerNotFoundException(id));
+        return repository.findById(id)
+                .orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
     @PutMapping("/customers/{id}")
@@ -56,6 +50,24 @@ class CustomerHTTP {
                     newCustomer.setId(id);
                     return repository.save(newCustomer);
                 });
+    }
+
+    @PatchMapping("/customers/{id}")
+    Customer updateEmployee(@RequestBody Customer customer, @PathVariable Integer id) {
+        return repository.findById(id)
+                .map(existingCustomer -> {
+                    if (customer.getName() != null) {
+                        existingCustomer.setName(customer.getName());
+                    }
+                    if (customer.getEmail() != null) {
+                        existingCustomer.setEmail(customer.getEmail());
+                    }
+                    if (customer.getAge() != null) {
+                        existingCustomer.setAge(customer.getAge());
+                    }
+                    return repository.save(existingCustomer);
+                })
+                .orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
     @DeleteMapping("/customers/{id}")
