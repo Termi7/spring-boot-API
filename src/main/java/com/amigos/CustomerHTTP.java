@@ -26,7 +26,7 @@ class CustomerHTTP {
     }
 
 
-    @GetMapping("/employees/{id}")
+    @GetMapping("/customers/{id}")
     Customer one(@PathVariable Integer id) {
 
         return repository.findById(id)
