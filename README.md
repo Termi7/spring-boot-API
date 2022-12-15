@@ -1,3 +1,2 @@
 # spring-boot-exemple
-This is consist of buiding a api using java spring boot .
-
+This is a project of backend api Crud that respond to request and answer to a Customeers application.
