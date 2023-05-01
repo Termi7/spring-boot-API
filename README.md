@@ -7,7 +7,7 @@ This is a simple backend API project that responds to requests and provides data
 - Implements CRUD operations (Create, Read, Update, Delete)
 - Provides RESTful API endpoints for the customer application
 - Built using Spring Boot framework
-- Uses a MySQL database to store and retrieve data
+- Uses a Spring boot Repository  to store and retrieve data
 - Provides error handling and input validation
 
 ## Technologies Used
